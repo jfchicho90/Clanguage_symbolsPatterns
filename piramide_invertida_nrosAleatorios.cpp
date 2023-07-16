@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-const int DIM = 30;
-
 void piramide_invertida_vacio_aleatorios(int DIM);
 int leer_Dimension();
 int condicion_lectura(int nro_ingresado);
@@ -38,7 +36,7 @@ int condicion_lectura(int nro_ingresado)
 
 void piramide_invertida_vacio_aleatorios(int DIM)
 {
-    char espacio = ' '; //Puedo crear una piramide invertida vacia asi como seleccionar cualquier otro simbolo
+    char espacio = ' '; //El programa permite crear una piramide invertida de numoers aleatorios
     int i = 0;
     int contador_numeros_izquierda = i + 1;
     int contador_simbolos_derecha = DIM - i - 1;
@@ -47,25 +45,24 @@ void piramide_invertida_vacio_aleatorios(int DIM)
     {
         for(int j = 0; j < contador_numeros_izquierda; j++)
         {
-        printf(" %d ", rand()%5 + 1);
+            printf(" %c ", espacio);
         }
-        //Este bucle permite imprimir numeros aleatorios formando un triangulo lateral escalonado hacia la derecha
+        //Este bucle permite imprimir espacios a la izquierda de la piramide.
         
         for(int j = contador_numeros_izquierda; j < contador_simbolos_derecha; j++)
         {
-            printf(" %c ", espacio);
+            printf(" %d ", rand()%5 + 1);
         }
-        //Finalmente esto me permite completar con espacios el vacio entre ambos escalonados comformando la piramide
-        //invertida
+        //Este bucle permite imprimir numeros aleatorios formando la piramide.
         
         for(int j = contador_simbolos_derecha; j < DIM; j++)
         {
-            printf(" %d ", rand()%5 + 1);
+            printf(" %c ", espacio);
         }
-        //Este bucle permite imprimir numeros aleatorios formando un triangulo lateral escalonado hacia la izquierda
+        //Este bucle permite imprimir espacios a la ierecha de la piramide.
         
-        contador_numeros_izquierda++; //Sirve este incremento para poder completar con numeros la escalera izquierda
-        contador_simbolos_derecha--; //Exactamente lo mismo para completar con numeros la escalera derecha
+        contador_numeros_izquierda++; //Sirve este incremento para poder completar con vacios de manera crenciente fila a fila
+        contador_simbolos_derecha--; //Exactamente lo mismo para completar con vacios la escalera izquierda
         printf("\n");
     }
 
