@@ -1,29 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define inferior_limit 7
+#define inferior_limit 3
 #define superior_limit 20
 
-void upsideDownTriangle(int entering_Dimension);
-int readingDimension();
-int validating_Dimension(int entering_Dimension);
+void upsideDownTriangle(int rows);
+int readingRows();
+int validating_Rows(int rows);
 
 int main()
 {
 
-    //The program allows to create an upside down triangle filled with random numbers between 1 and 5.
-    int TRIANGLE_DIM = readingDimension();
+    int TRIANGLE_DIM = readingRows();
     upsideDownTriangle(TRIANGLE_DIM);
 
     return 0;
 }
 
-int readingDimension()
+int readingRows()
 {
     int number;
-    printf("Enter triangle dimension between %d and %d\n", inferior_limit, superior_limit);
+    printf("Enter rows%d and %d: ", inferior_limit, superior_limit);
     scanf("%d", &number);
-    while(!validating_Dimension(number))
+    while(!validating_Rows(number))
     {
         printf("Error. Enter again: ");
         fflush(stdin);
@@ -32,41 +31,32 @@ int readingDimension()
     return number;
 }
 
-int validating_Dimension(int entering_Dimension)
+int validating_Rows(int rows)
 {
-    return entering_Dimension >= inferior_limit && entering_Dimension <= superior_limit;
-    //We make sure that the dimension entered is in the right range of values to be entered.
+    return rows >= inferior_limit && rows <= superior_limit;
 }
 
-void upsideDownTriangle(int entering_Dimension)
+void upsideDownTriangle(int rows)
 {
-    char space = ' '; 
+    int counterSpaces = 0;
     int i = 0;
-    int left_spaces_counter = i;
-    int right_spaces_counter = entering_Dimension - i - 1;
+    int counterSymbols = 0;
 
-    for(i = 0; i < entering_Dimension/2; i++)
+    for(i = 0; i < rows; i++)
     {
-        for(int j = 0; j < left_spaces_counter; j++)
+        for(int j = 0; j < counterSpaces; j++)
         {
-            printf("%c", space);
+            printf("%c", ' ');
         }
-        //The loop prints spaces to the left of the triangle.
         
-        for(int j = left_spaces_counter; j < right_spaces_counter; j++)
+        
+        for(int j = 0; j < counterSymbols; j++)
         {
-            printf("%d", rand()%5 + 1);
+            printf("%d ", rand()%5 + 1);
         }
-        //Pringing random numbers forming the triangle.
-        
-        for(int j = right_spaces_counter; j < entering_Dimension; j++)
-        {
-            printf("%c", space);
-        }
-        //The loop prints spaces to the right of the triangle.
-        
-        left_spaces_counter++; 
-        right_spaces_counter--; 
+         
+        counterSpaces++;
+        counterSymbols = rows - counterSpaces;
         printf("\n");
     }
 
